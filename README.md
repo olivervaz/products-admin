@@ -21,7 +21,7 @@ For update and install all required packages use ```npm install```
 
 ## Version History
 
-* 0.0.1
+* 1.0.0
     * Initial Release
 
 ## Acknowledgments
