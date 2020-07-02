@@ -5,7 +5,7 @@ Simple universal admin app for sales team.
 
 Admin app on pure Javascript
 
-##Installing
+## Installing
 
 ### Clone
 Clone this repo to your local machine using ```git clone https://github.com/olivervaz/products-admin.git```.
