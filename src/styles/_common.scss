@@ -1,0 +1,23 @@
+body{
+  font-family: $font-primary;
+}
+
+.button-primary,
+.button-primary-outline {
+  @extend %btn-medium;
+  padding: 6px 34px;
+}
+
+.button-primary {
+  @include btn($color-primary, $color-text-secondary);
+  box-shadow: 0 4px 10px rgba(16, 156, 241, 0.24);
+}
+
+.button-primary-outline {
+  @include btn($color-bg-primary, $color-primary, $color-primary);
+}
+
+%btn-medium{
+  font-size: map_get($font-sizes, 'text-sm');
+  line-height: map_get($line-heights, "xl");
+}
