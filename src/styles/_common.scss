@@ -2,6 +2,11 @@ body{
   font-family: $font-primary;
 }
 
+%btn-medium{
+  font-size: map_get($font-sizes, 'text-sm');
+  line-height: map_get($line-heights, "xl");
+}
+
 .button-primary,
 .button-primary-outline {
   @extend %btn-medium;
@@ -15,9 +20,4 @@ body{
 
 .button-primary-outline {
   @include btn($color-bg-primary, $color-primary, $color-primary);
-}
-
-%btn-medium{
-  font-size: map_get($font-sizes, 'text-sm');
-  line-height: map_get($line-heights, "xl");
 }
