@@ -1,6 +1,6 @@
 /*-----Colors-----*/
 
-$grayscale:(
+$grayscale: (
   "black": #192a3e,
   "grey": #90a0b7,
   "grey-light": #c2cfe0,
@@ -17,7 +17,7 @@ $colors-aside: (
 $color-primary: #109cf1;
 $color-secondary: #334d6e; //dark-blue
 
-$color-bg-secondary: #ecedef;
+$color-bg-secondary: #f5f6f8;
 $color-bg-primary: #ffffff;
 
 $color-text-primary: map_get($grayscale,"grey");
@@ -42,12 +42,11 @@ $line-heights: (
 );
 
 $font-sizes: (
-  "text-xxs":.64rem,
-  "text-xs":.8rem,
-  "text-sm":1rem,
-  "text-md":1.25rem,
-  "text-lg": 1.4rem,
-  "text-xl": 1.8rem,
+  "text-xs":.64rem,
+  "text-sm":.75rem,
+  "text-md":1rem,
+  "text-lg": 1.5rem,
+  "text-xl": 1.75rem,
   "text-xxl": 2.5rem,
   "text-xxxl": 4rem
 );
