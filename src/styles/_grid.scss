@@ -1,0 +1,36 @@
+.main {
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  grid-template-rows: minmax(100vh, auto);
+  grid-template-areas: "sidebar content";
+}
+
+.content {
+  grid-area: content;
+  background: $color-bg-secondary;
+  padding: 24px 36px;
+
+  &__top-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  & .form-inline {
+    width: 50%;
+  }
+
+  &-box {
+    padding: 34px 32px 48px;
+    background-color: map_get($grayscale, "white");
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    margin-bottom: 24px;
+  }
+
+  &.content-box_small {
+    padding: 16px 32px;
+  }
+
+}

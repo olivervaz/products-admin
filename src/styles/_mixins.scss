@@ -1,0 +1,49 @@
+@mixin link($link-color,$font-size: map_get($font-sizes,"text-md")) {
+  color: $link-color;
+  font-size: $font-size;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    color: fade_in($link-color, 1%);
+  }
+}
+
+@mixin btn($bg-color,
+           $text-color,
+           $border-color: $bg-color,
+           $font-weight: map_get($font-weights,"medium")
+) {
+  color: $text-color;
+  background: $bg-color;
+  font-weight: $font-weight;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  transition: 0.2s all;
+
+  &:focus,
+  &:hover,
+  &:active,
+  &.active {
+    outline: none;
+    opacity: 0.8;
+  }
+}
+
+@mixin bg-img($url, $position) {
+  background-image: $url;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: $position;
+}
+
+%selection {
+  content: "";
+  display: block;
+  position: absolute;
+  color: $color-bg-secondary;
+}

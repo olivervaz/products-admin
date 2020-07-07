@@ -1,0 +1,117 @@
+.sidebar {
+  grid-area: sidebar;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+  background: $color-bg-primary;
+  box-shadow: 6px 0 18px rgba(0, 0, 0, 0.06);
+  padding: 24px 26px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    font-size: map_get($font-sizes,"text-lg");
+    line-height: map_get($line-heights, "xl");
+    color: $color-secondary;
+    margin-top: 0;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+
+    & a {
+      color: inherit;
+    }
+
+    & a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__nav {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+
+    & li {
+      margin-bottom: 16px;
+    }
+
+    & li:last-child {
+      margin-bottom: 0;
+    }
+
+    & li a,
+    & li button {
+      position: relative;
+      padding-left: 32px;
+      font-size: map_get($font-sizes, "text-md");
+      line-height: map_get($line-heights, "lg");
+      color: $color-secondary;
+    }
+
+    & li a i,
+    & li button i {
+      color: map_get($grayscale, "gray-light");
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+
+    & li a:hover,
+    & li a:focus,
+    & li a:active,
+    & li.active a,
+    & li a:hover i,
+    & li a:focus i,
+    & li a:active i,
+    & li.active a i,
+    & li button:hover,
+    & li.active button,
+    & li button:hover i,
+    & li.active button i {
+      color: $color-primary;
+    }
+
+  }
+
+  &__toggler {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    height: 24px;
+  }
+}
+
+.is-collapsed-sidebar .sidebar ul {
+  margin-left: -3px;
+
+  & a span,
+  & button span {
+    display: none;
+  }
+}
+
+.is-collapsed-sidebar .sidebar__title {
+  font-size: map_get($font-sizes,"text-sm");
+  line-height: map_get($line-heights, "md");
+  margin-left: -16px;
+  text-align: center;
+  width: 48px;
+}
+
+.is-collapsed-sidebar .main {
+  grid-template-columns: 70px 1fr;
+}
+
+.is-collapsed-sidebar .sidebar__nav_bottom li {
+  height: 24px;
+}
+

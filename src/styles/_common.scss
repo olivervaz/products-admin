@@ -1,0 +1,48 @@
+body{
+  font-family: $font-primary;
+}
+
+%btn-medium{
+  font-size: map_get($font-sizes, "text-md");
+  line-height: map_get($line-heights, "xl");
+}
+
+.button-primary,
+.button-primary-outline {
+  @extend %btn-medium;
+  padding: 6px 34px;
+}
+
+.button-primary {
+  @include btn($color-primary, $color-text-secondary);
+  box-shadow: 0 4px 10px rgba(16, 156, 241, 0.24);
+}
+
+.button-primary-outline {
+  @include btn($color-bg-primary, $color-primary, $color-primary);
+}
+
+.page-title {
+  font-weight: map_get($font-weights, "semi-bold");
+  font-size: map_get($font-sizes,"text-xl");
+  line-height: map_get($line-heights, "xl");
+  color: map_get($grayscale, "grey");
+  margin: 0;
+
+  & .link {
+    color: $color-primary;
+  }
+
+  & .link.disabled {
+    color: inherit;
+    pointer-events: none;
+  }
+}
+
+.block-title {
+  font-weight: map_get($font-weights,"semi-bold");
+  font-size: map_get($font-sizes, "text-lg");
+  line-height: map_get($line-heights, "lg");
+  color: map_get($grayscale,"grey");
+  margin: 40px 0 24px;
+}
