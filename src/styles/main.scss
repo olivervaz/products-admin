@@ -2,6 +2,7 @@
 @import "variables";
 @import "mixins";
 @import "common";
+@import "grid";
 
 
 /* Styles for components  */
@@ -9,3 +10,4 @@
 
 /* Styles for pages  */
 /* pages */
+@import "../pages/sidebar";
