@@ -1,0 +1,174 @@
+.sortable-table {
+  background-color:  map_get($grayscale, 'white');
+  max-width: 100%;
+  border-radius: 4px;
+  margin-bottom: 40px;
+  overflow: hidden;
+
+  &__row {
+    display: grid;
+    grid: auto-flow / 80px calc(50% - 80px) 20% 15% 15% 10%;
+    text-decoration: none;
+  }
+
+  &__row.bold {
+    font-weight: map_get($font-weights, 'semi-bold'); /*todo: make bold on sort selection*/
+  }
+
+  &__body &__row:hover {
+    background-color: map_get($grayscale, 'grey-extra-light');
+  }
+
+  &__cell {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    font-size: map_get($font-sizes, 'text-md');
+    line-height: map_get($line-heights, 'md');
+    color: map_get($grayscale, 'black-light');
+    border-top: 1px solid map_get($grayscale, 'grey-light');
+  }
+
+  &__cell:first-child {
+    padding-left: 32px;
+  }
+
+  &__cell:last-child {
+    padding-right: 32px;
+  }
+
+  &__cell-img {
+    height: 40px;
+    max-width: 100%;
+    padding: 4px;
+    border: 1px solid map_get($grayscale, 'grey-light');
+    border-radius: 2px;
+  }
+
+  &__cell[data-order='asc'] .sort-arrow {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid map_get($grayscale, 'grey-light');
+  }
+
+  &__cell[data-order='desc'] .sort-arrow {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid map_get($grayscale, 'grey-light');
+  }
+
+  &__sort-arrow {
+    padding: 8px;
+    display: inline-flex;
+    cursor: pointer;
+  }
+
+  &__header &__cell {
+    color: map_get($grayscale, 'grey-light');
+    border-top: none;
+  }
+
+  &__header &__cell[data-sortable] {
+    cursor: pointer;
+  }
+
+  &&_loading {
+    grid-template-columns: auto;
+  }
+
+  /*styles for empty table*/
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &__empty-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1 0 auto;
+    border-radius: 4px;
+    background: map_get($grayscale, 'grey-extra-light');
+    border: 1px solid map_get($grayscale, 'grey-light');
+    color: map_get($grayscale,'grey');
+  }
+
+  &__empty-placeholder p {
+    margin: 0 0 12px;
+  }
+
+  &__empty-placeholder,
+  &__empty &__header,
+  &__empty &__body {
+    display: none;
+  }
+
+  /*----*/
+
+  &-image {
+    height: 40px;
+    max-width: 100%;
+    padding: 4px;
+    border: 1px solid map_get($grayscale, 'grey-light');
+    border-radius: 2px;
+  }
+
+  &-tooltip__category {
+    color: map_get($grayscale,'grey');
+  }
+
+  &-tooltip__subcategory {
+    color: $color-secondary;
+  }
+
+}
+
+/* Loading line */
+
+.sortable-table__loading-line {
+  grid-column: 1 / 7;
+  display: none;
+  margin: 16px;
+}
+
+.sortable-table.sortable-table_loading .sortable-table__body {
+  display: none;
+}
+
+.sortable-table.sortable-table_loading .sortable-table__loading-line {
+  display: grid;
+}
+
+.loading-line {
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: backgroundMovement;
+  animation-timing-function: linear;
+  background: map_get($grayscale, 'grey-extra-light');
+  background: linear-gradient(
+      267.58deg,
+      map_get($grayscale, 'grey-light') 0%,
+      map_get($grayscale, 'grey-extra-light') 80%,
+      map_get($grayscale, 'grey-light') 100%
+  );
+  background-size: 200%;
+  border-radius: 2px;
+  height: 20px;
+}
+
+@keyframes backgroundMovement {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}

@@ -1,0 +1,142 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .sortable-table {
+      background-color: white;
+      max-width: 100%;
+      border-radius: 4px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .sortable-table__row {
+      display: grid;
+      grid: auto-flow / 80px calc(50% - 80px) 20% 15% 15% 10%;
+      text-decoration: none;
+    }
+
+    .sortable-table__cell {
+      padding: 16px;
+      font-size: 16px;
+      line-height: 20px;
+      color: darkslategray;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid lightgray;
+    }
+
+    .sortable-table__cell:first-child {
+      padding-left: 32px;
+    }
+
+    .sortable-table__cell:last-child {
+      padding-right: 32px;
+    }
+
+    .sortable-table__header .sortable-table__cell {
+      color: lightgray;
+      border-top: none;
+    }
+
+    .sortable-table__header .sortable-table__cell[data-sortable] {
+      cursor: pointer;
+    }
+
+    .sortable-table__body .sortable-table__row:hover {
+      background-color: lightgrey;
+    }
+
+    .sortable-table__empty-placeholder {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .sortable-table__empty-placeholder p {
+      margin: 0 0 12px;
+    }
+
+    .sortable-table_empty .sortable-table__empty-placeholder {
+      background: lightgrey;
+      border: 1px solid darkgray;
+      border-radius: 4px;
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: gray;
+    }
+
+    .sortable-table-image {
+      height: 40px;
+      max-width: 100%;
+      padding: 4px;
+      border: 1px solid lightgray;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+<div data-elem="productsContainer" class="products-list__container">
+  <div class="sortable-table">
+
+    <div data-elem="header" class="sortable-table__header sortable-table__row">
+      <div class="sortable-table__cell" data-name="images">
+        <span>Image</span>
+      </div>
+      <div class="sortable-table__cell" data-name="title" data-sortable="">
+        <span>Name</span>
+        <span class="sortable-table__sort-arrow">
+          <span class="sort-arrow"></span>
+        </span>
+      </div>
+      <div class="sortable-table__cell" data-name="category">
+        <span>Category</span>
+      </div>
+      <div class="sortable-table__cell" data-name="quantity" data-sortable="">
+        <span>Quantity</span>
+      </div>
+      <div class="sortable-table__cell" data-name="price" data-sortable="">
+        <span>Price</span>
+      </div>
+      <div class="sortable-table__cell" data-name="enabled" data-sortable="">
+        <span>Status</span>
+      </div>
+    </div>
+
+    <div data-elem="body" class="sortable-table__body">
+      <a href="#" class="sortable-table__row">
+        <div class="sortable-table__cell">
+          <img class="sortable-table-image" alt="Image" src="http://magazilla.ru/jpg_zoom1/246743.jpg">
+        </div>
+        <div class="sortable-table__cell">3D glasses, IMAX</div>
+        <div class="sortable-table__cell">3D glasses</div>
+        <div class="sortable-table__cell">16</div>
+        <div class="sortable-table__cell">$91</div>
+        <div class="sortable-table__cell">Enabled</div>
+      </a>
+
+      <a href="#" class="sortable-table__row">
+        <div class="sortable-table__cell"><img class="sortable-table-image" alt="Image"
+                                               src="http://magazilla.ru/jpg_zoom1/460094.jpg"></div>
+        <div class="sortable-table__cell">DVD/Blu-ray player Pioneer BDP-170</div>
+        <div class="sortable-table__cell">DVD/Blu-ray players</div>
+        <div class="sortable-table__cell">55</div>
+        <div class="sortable-table__cell">$256</div>
+        <div class="sortable-table__cell">Enabled</div>
+      </a>
+
+    <div data-elem="emptyPlaceholder" class="sortable-table__empty-placeholder">
+      <div>
+        <p>No products satisfies your filter criteria</p>
+        <button type="button" class="button-primary-outline">Reset all filters</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</
