@@ -8,7 +8,10 @@
 /* Styles for components  */
 /* components */
 @import "../components/column-chart/style";
+@import "../components/sortable-table/style";
+@import "../components/range-picker/style";
 
 /* Styles for pages  */
 /* pages */
 @import "../pages/sidebar";
+@import "../pages/dashboard/style";
