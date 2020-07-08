@@ -1,0 +1,22 @@
+.dashboard__charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 24px;
+  $chart-height: 50;
+}
+
+.dashboard__chart_orders {
+  $chart-column-color: map_get($colors-aside, 'yellow');
+}
+
+.dashboard__chart_sales {
+  $chart-column-color: map_get($colors-aside, 'green');
+}
+
+.dashboard__chart_customers {
+  $chart-column-color: map_get($colors-aside, 'purple');
+}
+
+.dashboard .sortable-table {
+  $cols: 6;
+}
