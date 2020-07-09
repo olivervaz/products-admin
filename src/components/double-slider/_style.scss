@@ -1,0 +1,80 @@
+.range-slider {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 60px;
+
+  & > span {
+    width: 60px;
+    position: absolute;
+    top: 50%;
+    font-weight: map_get($font-weights, 'bold');
+    font-size: map_get($font-sizes, 'text-md');
+    line-height: map_get($line-heights, 'lg');
+    color: map_get($grayscale, 'grey');
+    transform: translate(0, -50%);
+  }
+
+  & > span:first-child {
+    text-align: right;
+    left: 0;
+  }
+
+  & > span:last-child {
+    right: 0;
+  }
+
+  &__inner {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 4px;
+    margin: 10px 14px;
+    background: lighten($color-primary, 3%);
+    box-shadow: 0 0 1px map_get($grayscale, 'lightgrey');
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+  }
+
+  &__thumb-right,
+  &__thumb-left {
+    position: absolute;
+    top: 50%;
+    margin-top: -9px;
+    height: 18px;
+    width: 6px;
+    background: url("range-thumb-icon.svg") left center no-repeat;
+    background-size: cover;
+    cursor: grab;
+  }
+
+  /* cursor over all slider, so that if the cursor moves out of the thumb, it's still grabbing */
+  &_dragging,
+  &_dragging .range-slider__thumb-right,
+  &_dragging .range-slider__thumb-left {
+    cursor: grabbing;
+  }
+
+  &__thumb-left {
+    left: 0;
+    margin-left: -6px;
+  }
+
+  &__thumb-right {
+    right: 0;
+    transform: rotate(180deg);
+    margin-right: -6px;
+  }
+
+  &__progress {
+    background: $color-primary;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: map_get($z-indexes,'upper');
+  }
+}
