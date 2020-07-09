@@ -1,0 +1,43 @@
+.product-form {
+
+  & form:not(.form-inline) {
+    max-width: 800px;
+  }
+
+  & .form .form-group__wide [class*="button-"] {
+    width: 160px;
+    margin-bottom: 8px;
+  }
+
+  & .sortable-list {
+    margin: 8px 0 16px;
+    list-style: none;
+    padding: 0;
+  }
+
+  & .products-edit__imagelist-item {
+    background-color: $color-bg-secondary;
+    box-shadow: none;
+    margin: 3px 0;
+    padding: 8px 12px;
+  }
+
+  & .products-edit__imagelist-item > span {
+    display: flex;
+    align-items: center;
+  }
+
+  & .products-edit__imagelist-item > button {
+    padding: 0;
+    box-shadow: none;
+    background: none;
+    border: none;
+    outline: none;
+    margin: 0 8px;
+  }
+
+  & .products-edit__imagelist-item > span > * {
+    margin: 0 8px;
+  }
+
+}
