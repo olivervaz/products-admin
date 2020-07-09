@@ -1,0 +1,14 @@
+.tooltip {
+  cursor: pointer;
+  position: fixed;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-align: left;
+  background: $color-bg-primary;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  font-size: map_get($font-sizes, 'text-md');
+  line-height: map_get($line-heights, 'lg');
+  color: $color-text-primary;
+  transition: opacity 0.1s ease-out;
+  z-index: map_get($z-indexes, 'top');
+}
