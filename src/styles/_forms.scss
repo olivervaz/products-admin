@@ -1,0 +1,126 @@
+form.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+
+  & .form-group {
+    display: grid;
+    position: relative;
+  }
+
+  & fieldset {
+    display: grid;
+    grid-gap: 16px;
+    border: none;
+    padding: 0;
+  }
+
+  & .form-group__wide {
+    grid-column: 1 / 4;
+  }
+
+  & .form-group__half_left {
+    grid-column: 1 / 3;
+  }
+
+  & .form-group__half_right {
+    grid-column: 2 / 4;
+  }
+
+  & .form-group__part-half {
+    grid-column: 1 / 2;
+  }
+
+  & .form-group__two-col {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+  }
+
+  & .form-control {
+    width: 100%;
+  }
+}
+
+form .form-group.has-error {
+  & .form-control {
+    border-color: map_get($colors-aside, 'red');
+  }
+
+  & .form-error-text {
+    display: inline-block;
+    color: map_get($colors-aside, 'red');
+  }
+}
+
+form .form-control,
+form .form-label {
+  font-weight: map_get($font-weights, 'regular');
+  font-size: map_get($font-sizes, 'text-md');
+  line-height: map_get($line-heights, 'md');
+}
+
+
+form .form-label {
+  color: map_get($grayscale, 'black-light');
+  margin-bottom: 8px;
+}
+
+form .form-control {
+  background-color: $color-bg-primary;
+  border: 1px solid map_get($grayscale, 'grey-light');;
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: $color-secondary;
+}
+
+form .form-control::placeholder {
+  color: map_get($grayscale, 'grey-light');
+}
+
+form .form-error-text {
+  margin-top: 8px;
+  display: none;
+}
+
+.form-group_nested {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 16px;
+}
+
+form textarea {
+  resize: none;
+  min-height: 186px;
+}
+
+form select.form-control {
+  height: 38px;
+}
+
+form .form-buttons {
+  display: grid;
+  grid-column: 1 / 3;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  margin-top: 24px;
+}
+
+form.form-inline {
+  display: grid;
+  grid: auto-flow / repeat(auto-fit, minmax(50px, 1fr));
+  grid-gap: 16px;
+
+  & .form-group {
+    margin-bottom: 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
