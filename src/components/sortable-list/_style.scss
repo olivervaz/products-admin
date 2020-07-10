@@ -1,0 +1,86 @@
+.sortable-list {
+  position: relative;
+  padding: 0;
+  margin: 12px 0;
+
+  &__item {
+    min-height: 60px;
+    background-color: $color-bg-primary;
+    list-style: none;
+    padding: 16px 16px 16px 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px map_get($grayscale, 'grey-extra-light');
+    border-radius: 4px;
+    margin: 16px 0;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  &__item[data-grab-handle],
+  &__item [data-grab-handle] {
+    cursor: grab;
+  }
+
+  &__item [data-delete-handle] {
+    cursor: pointer;
+  }
+
+  &__item-arrow {
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid map_get($grayscale, 'grey-light');
+    position: absolute;
+    left: 16px;
+    top: -50%;
+    transform: translate(0, -50%);
+  }
+
+  &__item-title {
+    font-weight: map_get($font-weights, 'semi-bold');
+    font-size: map_get($font-sizes, 'text-md');
+    line-height: map_get($line-heights,'lg');
+    color: $color-secondary;
+  }
+
+  &__item-nav {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__item-nav > a {
+    display: inline-flex;
+    padding: 0 4px;
+    font-size: map_get($font-sizes, 'text-md');
+    line-height: map_get($line-heights,'lg');
+    color: $color-primary;
+    border-left: 1px solid map_get($grayscale, 'grey-light')
+  }
+
+  &__item-nav > a:first-child {
+    border-left: none;
+  }
+
+  &__item.sortable-list__item_dragging {
+    position: fixed;
+    max-width: 100%;
+    cursor: grabbing;
+    border: 1px solid $color-primary;
+    margin: 0;
+    z-index: map_get($z-indexes, 'top');
+  }
+
+  &__placeholder {
+    border: 1px solid $color-primary;
+    margin: 3px 0;
+    border-radius: 4px;
+  }
+
+}
+
