@@ -1,20 +1,22 @@
+$chart-height: 50;
+$component-color: $color-primary;
+
 .dashboard__charts {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 24px;
-  $chart-height: 50;
 }
 
 .dashboard__chart_orders {
-  $chart-column-color: map_get($colors-aside, 'yellow');
+  $component-color: map_get($colors-aside, 'yellow') !global;
 }
 
 .dashboard__chart_sales {
-  $chart-column-color: map_get($colors-aside, 'green');
+  $component-color: map_get($colors-aside, 'green') !global;
 }
 
 .dashboard__chart_customers {
-  $chart-column-color: map_get($colors-aside, 'purple');
+  $component-color: map_get($colors-aside, 'purple') !global;
 }
 
 .dashboard .sortable-table {

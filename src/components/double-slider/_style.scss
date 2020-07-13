@@ -45,12 +45,11 @@
     margin-top: -9px;
     height: 18px;
     width: 6px;
-    background: url("range-thumb-icon.svg") left center no-repeat;
+    background: url("../components/double-slider/range-thumb-icon.svg") left center no-repeat;
     background-size: cover;
     cursor: grab;
   }
 
-  /* cursor over all slider, so that if the cursor moves out of the thumb, it's still grabbing */
   &_dragging,
   &_dragging .range-slider__thumb-right,
   &_dragging .range-slider__thumb-left {

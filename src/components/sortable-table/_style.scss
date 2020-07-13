@@ -76,7 +76,7 @@
     cursor: pointer;
   }
 
-  &&_loading {
+  &.sortable-table_loading {
     grid-template-columns: auto;
   }
 

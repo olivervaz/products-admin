@@ -73,6 +73,7 @@ export default class Page {
   }
 
   async getDataForColumnCharts(from, to) {
+    console.log(BACKEND_URL + 'api');
     const ORDERS = `${BACKEND_URL}api/dashboard/orders?
                             from=${from.toISOString()}&to=${to.toISOString()}`;
     const SALES = `${BACKEND_URL}api/dashboard/sales?
