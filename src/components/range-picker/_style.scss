@@ -11,7 +11,7 @@
     background-color: $color-bg-primary;
     border: 1px solid map_get($grayscale, 'grey-light');
     border-radius: 4px;
-    background: map_get($grayscale, 'white') url("calendar-icon.svg") 16px center no-repeat;
+    background: map_get($grayscale, 'white') url("../components/range-picker/calendar-icon.svg") 16px center no-repeat;
     background-size: 18px 18px;
   }
 
@@ -67,7 +67,7 @@
   }
 
 
-  &_open .&__selector {
+  &_open .rangepicker__selector {
     display: inline-flex;
   }
 
@@ -103,7 +103,7 @@
     justify-content: center;
     cursor: pointer;
     transition: 0.3s all;
-    background: url("angle-arrow-icon.svg") left center no-repeat;
+    background: url("../components/range-picker/angle-arrow-icon.svg") left center no-repeat;
     background-size: 9px 13px;
   }
 
@@ -163,7 +163,7 @@
   &__cell:active,
   &__cell.rangepicker__selected,
   &__cell.rangepicker__selected-from,
-  &__cell&__selected-to {
+  &__cell.rangepicker__selected-to {
     background-color: $color-primary;
     color: $color-text-secondary;
   }
@@ -176,17 +176,17 @@
     transition: 0.2s all;
   }
 
-  &__cell&__selected:hover,
-  &__cell&__selected-from:hover,
-  &__cell&__selected-to:hover,
-  &__cell&__selected:focus,
-  &__cell&__selected-from:focus,
-  &__cell&__selected-to:focus {
+  &__cell.rangepicker__selected:hover,
+  &__cell.rangepicker__selected-from:hover,
+  &__cell.rangepicker__selected-to:hover,
+  &__cell.rangepicker__selected:focus,
+  &__cell.rangepicker__selected-from:focus,
+  &__cell.rangepicker__selected-to:focus {
     background-color: $color-primary;
     color: $color-secondary;
   }
 
-  &__cell&__selected-between {
+  &__cell.rangepicker__selected-between {
     background-color: lighten($color-primary, 4%);
   }
 }
