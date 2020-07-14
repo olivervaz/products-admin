@@ -17,10 +17,12 @@ export default class Page {
   async initComponents() {
     const to = new Date();
     const from = new Date(to.getTime() - (30 * 24 * 60 * 60 * 1000));
-    const [ordersData, salesData, customersData] = await this.getDataForColumnCharts(from, to);
+    const encodedFrom = encodeURIComponent(from.toISOString());
+    const encodedTo = encodeURIComponent(to.toISOString());
+    const [ordersData, salesData, customersData] = await this.getDataForColumnCharts(from,to);
 
     const sortableTable = new SortableTable(header, {
-      url: `/api/dashboard/bestsellers?from=${from.toISOString()}&to=${to.toISOString()}&_start=0&_end=30`,
+      url: `/api/dashboard/bestsellers?from=${encodedFrom}&to=${encodedTo}&_start=0&_end=30`,
       isSortLocally: true,
     });
 
@@ -72,17 +74,16 @@ export default class Page {
   }
 
   async getDataForColumnCharts(from, to) {
-    console.log(BACKEND_URL + 'api');
-    const ORDERS = `${BACKEND_URL}api/dashboard/orders?
-                            from=${from.toISOString()}&to=${to.toISOString()}`;
-    const SALES = `${BACKEND_URL}api/dashboard/sales?
-                            from=${from.toISOString()}&to=${to.toISOString()}`;
-    const CUSTOMERS = `${BACKEND_URL}api/dashboard/customers?
-                            from=${encodeURIComponent(from.toISOString())}&to=${encodeURIComponent(to.toISOString())}`;
+    const encodedFrom = encodeURIComponent(from.toISOString());
+    const encodedTo = encodeURIComponent(to.toISOString());
 
-    const ordersData = fetchJson(ORDERS);
-    const salesData = fetchJson(SALES);
-    const customersData = fetchJson(CUSTOMERS);
+    const ORDERS_URL = `${BACKEND_URL}api/dashboard/orders?from=${encodedFrom}&to=${encodedTo}`;
+    const SALES_URL = `${BACKEND_URL}api/dashboard/sales?from=${encodedFrom}&to=${encodedTo}`;
+    const CUSTOMERS_URL = `${BACKEND_URL}api/dashboard/customers?from=${encodedFrom}&to=${encodedTo}`;
+
+    const ordersData = fetchJson(ORDERS_URL);
+    const salesData = fetchJson(SALES_URL);
+    const customersData = fetchJson(CUSTOMERS_URL);
 
     const data = await Promise.all([ordersData, salesData, customersData]);
     return data.map(item => Object.values(item));
