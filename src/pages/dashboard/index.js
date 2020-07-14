@@ -1,7 +1,7 @@
 import SortableTable from '../../components/sortable-table';
 import RangePicker from '../../components/range-picker';
 import ColumnChart from '../../components/column-chart';
-import header from './tableHeadersConfig';
+import header from './bestsellersTableHeadersConfig';
 import fetchJson from '../../utils/fetch-json';
 
 const BACKEND_URL = process.env.BACKEND_URL;
@@ -22,7 +22,7 @@ export default class Page {
     const [ordersData, salesData, customersData] = await this.getDataForColumnCharts(from, to);
 
     const sortableTable = new SortableTable(header, {
-      url: `/api/dashboard/bestsellers?from=${encodedFrom}&to=${encodedTo}&_start=0&_end=30`,
+      url: `/api/dashboard/bestsellers?from=${encodedFrom}&to=${encodedTo}`,
       isSortLocally: true
     });
 
@@ -103,6 +103,7 @@ export default class Page {
     const BESTSELLERS_URL = `${BACKEND_URL}api/dashboard/bestsellers?_start=1&_end=20&from=${encodedFrom}&to=${encodedTo}`;
 
     const data = await fetchJson(BESTSELLERS_URL);
+    //TODO: implement logic with add rows;
     this.components.sortableTable.addRows(data);
   }
 

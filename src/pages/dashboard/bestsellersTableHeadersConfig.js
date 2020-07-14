@@ -39,7 +39,7 @@ const header = [
           ${data > 0 ? 'Active' : 'Inactive'}
         </div>`;
     }
-  },
+  }
 ];
 
 export default header;
