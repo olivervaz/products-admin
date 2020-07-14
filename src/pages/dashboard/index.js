@@ -1,8 +1,8 @@
-import SortableTable from "../../components/sortable-table";
-import RangePicker from "../../components/range-picker";
-import ColumnChart from "../../components/column-chart"
-import header from "./tableHeadersConfig";
-import fetchJson from '../../utils/fetch-json'
+import SortableTable from '../../components/sortable-table';
+import RangePicker from '../../components/range-picker';
+import ColumnChart from '../../components/column-chart';
+import header from './tableHeadersConfig';
+import fetchJson from '../../utils/fetch-json';
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -19,14 +19,14 @@ export default class Page {
     const from = new Date(to.getTime() - (30 * 24 * 60 * 60 * 1000));
     const encodedFrom = encodeURIComponent(from.toISOString());
     const encodedTo = encodeURIComponent(to.toISOString());
-    const [ordersData, salesData, customersData] = await this.getDataForColumnCharts(from,to);
+    const [ordersData, salesData, customersData] = await this.getDataForColumnCharts(from, to);
 
     const sortableTable = new SortableTable(header, {
       url: `/api/dashboard/bestsellers?from=${encodedFrom}&to=${encodedTo}&_start=0&_end=30`,
-      isSortLocally: true,
+      isSortLocally: true
     });
 
-    const rangePicker = new RangePicker({from, to});
+    const rangePicker = new RangePicker({ from, to });
 
     const ordersChart = new ColumnChart({
       data: ordersData,
@@ -97,7 +97,12 @@ export default class Page {
   }
 
   async updateTable(from, to) {
-    const data = await fetchJson(`${process.env.BACKEND_URL}api/dashboard/bestsellers?_start=1&_end=20&from=${from.toISOString()}&to=${to.toISOString()}`);
+    const encodedFrom = encodeURIComponent(from.toISOString());
+    const encodedTo = encodeURIComponent(to.toISOString());
+
+    const BESTSELLERS_URL = `${BACKEND_URL}api/dashboard/bestsellers?_start=1&_end=20&from=${encodedFrom}&to=${encodedTo}`;
+
+    const data = await fetchJson(BESTSELLERS_URL);
     this.components.sortableTable.addRows(data);
   }
 
@@ -122,7 +127,7 @@ export default class Page {
   renderComponents() {
     Object.keys(this.components).forEach(component => {
       const root = this.subElements[component];
-      const {element} = this.components[component];
+      const { element } = this.components[component];
 
       root.append(element);
     });
@@ -140,7 +145,7 @@ export default class Page {
 
   initEventListeners() {
     this.components.rangePicker.element.addEventListener('date-select', event => {
-      const {from, to} = event.detail;
+      const { from, to } = event.detail;
       this.updateColumnsCharts(from, to);
       this.updateTable(from, to);
     });
