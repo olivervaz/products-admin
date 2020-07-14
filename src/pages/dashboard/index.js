@@ -21,7 +21,6 @@ export default class Page {
 
     const sortableTable = new SortableTable(header, {
       url: `/api/dashboard/bestsellers?from=${from.toISOString()}&to=${to.toISOString()}&_start=0&_end=30`,
-      sorted: 'asc',
       isSortLocally: true,
     });
 
