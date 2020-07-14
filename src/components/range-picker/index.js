@@ -195,6 +195,8 @@ export default class RangePicker {
 
       this.subElements.input.innerHTML = this.inputTemplate;
       this.selectingFrom = true;
+      this.dispatchEvent();
+      this.close();
     }
   }
 
@@ -228,6 +230,19 @@ export default class RangePicker {
       item.classList.remove('rangepicker__selected-from');
       item.classList.remove('rangepicker__selected-to');
     });
+  }
+
+  dispatchEvent(){
+    const event = new CustomEvent('date-select', {
+      bubbles: true,
+      detail: this.selected
+    });
+
+    this.element.dispatchEvent(event);
+  }
+
+  close() {
+    this.element.classList.remove('rangepicker_open');
   }
 
   remove() {
