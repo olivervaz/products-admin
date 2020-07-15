@@ -3,7 +3,7 @@ export default class SortableList {
 
   onPointerDown = (event) => {
     const target = event.target.closest('.sortable-list__item');
-    const {clientX, clientY} = event;
+    const { clientX, clientY } = event;
 
     if (target) {
       event.preventDefault();
@@ -16,25 +16,25 @@ export default class SortableList {
       this.shift = {
         x: event.clientX - target.getBoundingClientRect().x,
         y: event.clientY - target.getBoundingClientRect().y
-      }
-      this.moveElement({clientX, clientY});
+      };
+      this.moveElement({ clientX, clientY });
 
       document.addEventListener('pointermove', this.onPointerMove);
       document.addEventListener('pointerup', this.onPointerUp);
     }
-  }
+  };
 
   onPointerMove = (event) => {
-    const {clientX, clientY} = event;
-    this.moveElement({clientX, clientY});
+    const { clientX, clientY } = event;
+    this.moveElement({ clientX, clientY });
 
     const elementBelow = document.elementFromPoint(clientX, clientY);
 
     if (elementBelow) {
       const elementParent = elementBelow.parentNode;
       const index = [...elementParent.children].indexOf(elementBelow);
-      const {top} = elementParent.firstElementChild.getBoundingClientRect();
-      const {bottom} = elementParent.lastElementChild.getBoundingClientRect();
+      const { top } = elementParent.firstElementChild.getBoundingClientRect();
+      const { bottom } = elementParent.lastElementChild.getBoundingClientRect();
 
       if (clientY < top) {
         this.movePlaceholderTo(index);
@@ -42,7 +42,7 @@ export default class SortableList {
         this.movePlaceholderTo(index + 1);
       }
     }
-  }
+  };
 
   onPointerUp = (event) => {
     const index = [...this.element.children].indexOf(this.placeholder);
@@ -56,9 +56,9 @@ export default class SortableList {
 
     document.removeEventListener('pointermove', this.onPointerMove);
     document.removeEventListener('pointerup', this.onPointerUp);
-  }
+  };
 
-  constructor({items = []} = {}) {
+  constructor({ items = [] } = {}) {
     //items should be node elements;
     this.items = items;
     this.render();
@@ -71,20 +71,13 @@ export default class SortableList {
 
     this.renderList();
 
-    this.element.addEventListener('pointerdown', this.onPointerDown)
+    this.element.addEventListener('pointerdown', this.onPointerDown);
   }
 
   get template() {
     return `
     <ul class="sortable-list">
-    </ul>`
-  }
-
-  get itemTemplate() {
-    const listItem = document.createElement('li');
-    listItem.classList.add("sortable-list__item");
-    listItem.setAttribute('data-grab-handle', '');
-    return listItem;
+    </ul>`;
   }
 
   get placeholderTemplate() {
@@ -99,13 +92,13 @@ export default class SortableList {
 
   renderList() {
     this.items.forEach(item => {
-      const li = this.itemTemplate;
-      li.append(item);
-      this.element.append(li);
+      item.classList.add('sortable-list__item');
+      item.dataset.grabHandle = 'true';
+      this.element.append(item);
     });
   }
 
-  moveElement({clientX, clientY}) {
+  moveElement({ clientX, clientY }) {
     this.moving.style.left = clientX - this.shift.x + 'px';
     this.moving.style.top = clientY - this.shift.y + 'px';
   }
@@ -129,8 +122,8 @@ export default class SortableList {
 
   dispatchEvent() {
     this.element.dispatchEvent(new CustomEvent('reordered', {
-      bubbles: true,
-    }))
+      bubbles: true
+    }));
   }
 
   scrollWindow(clientY) {
@@ -145,7 +138,7 @@ export default class SortableList {
   }
 
   destroy() {
-    this.element.removeEventListener('pointerdown', this.onPointerDown)
+    this.element.removeEventListener('pointerdown', this.onPointerDown);
     this.element.remove();
   }
 }
