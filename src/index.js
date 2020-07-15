@@ -5,4 +5,5 @@ const router = Router.instance();
 router
   .addRoute(/^$/, 'dashboard')
   .addRoute(/^sales$/, 'sales')
+  .addRoute(/^categories$/, 'categories')
   .listen();
