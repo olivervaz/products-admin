@@ -1,0 +1,37 @@
+.products{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & form.form-inline {
+    grid-template-columns: 3fr 3fr 2fr;
+    grid-gap: 46px;
+  }
+
+  & form.form-inline .form-group {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+
+  & form.form-inline .form-label {
+    margin-bottom: 0;
+    margin-right: 16px;
+  }
+}
+
+.content-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 34px 32px 48px;
+  background-color: $color-bg-primary;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+
+  &.content-box_small {
+    padding: 16px 32px;
+  }
+
+
+
+}

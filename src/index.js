@@ -6,4 +6,5 @@ router
   .addRoute(/^$/, 'dashboard')
   .addRoute(/^sales$/, 'sales')
   .addRoute(/^categories$/, 'categories')
+  .addRoute(/^products$/, 'products')
   .listen();
