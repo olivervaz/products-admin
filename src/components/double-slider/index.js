@@ -3,7 +3,7 @@ export default class DoubleSlider {
   subElements = {};
 
   constructor({
-                min = 100,
+                min = 0,
                 max = 200,
                 formatValue = value => '$' + value,
                 selected = {
