@@ -23,7 +23,15 @@ export default class Page {
       }
     });
 
-    const doubleSlider = new DoubleSlider({})
+    const doubleSlider = new DoubleSlider(
+      {
+        min: 0,
+        max: 3000,
+        selected: {
+          from: 500,
+          to: 1500
+        }
+      });
 
     this.components.sortableTable = sortableTable;
     this.components.doubleSlider = doubleSlider;
@@ -37,24 +45,24 @@ export default class Page {
       </div>
       <div class="content-box content-box_small">
         <form class="form-inline">
-         <div class="form-group">
+          <div class="form-group">
             <label class="form-label">Sort by:</label>
-            <input type="text" data-elem="filterName" class="form-control" placeholder="Product name">
+            <input type="text" data-element="filterName" class="form-control" placeholder="Product name">
           </div>
           <div class="form-group" data-element="doubleSlider">
-            <label class="form-label" for="">Price:</label>
+            <label class="form-label">Price:</label>
             <!-- double slider component -->
-          </div>
+            </div>
           <div class="form-group">
             <label class="form-label">Status:</label>
             <select class="form-control" data-elem="filterStatus">
-              <option value="" selected="">Both</option>
+              <option value="" selected="">Any</option>
               <option value="1">Active</option>
-              <option value="0">Not active</option>
+              <option value="0">Not Active</option>
             </select>
           </div>
-          </form>
-         </div>
+        </form>
+      </div>
       <div data-element="sortableTable">
         <!-- sortable-table component -->
       </div>
