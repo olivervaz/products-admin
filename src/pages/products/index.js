@@ -1,6 +1,7 @@
 import SortableTable from '../../components/sortable-table';
-import DoubleSlider from '../../components/double-slider';
+import FilterForm from '../../components/filter-form';
 import header from './productsTableHeadersConfig';
+import filters from './filterFormConfig';
 import fetchJson from '../../utils/fetch-json';
 
 const BACKEND_URL = process.env.BACKEND_URL;
@@ -10,7 +11,9 @@ export default class Page {
   subElements = {};
   components = {};
 
-  constructor() {
+  onDataFilter = (event)=> {
+    console.log('changed');
+    console.log('here:' ,event.detail);
   }
 
   async initComponents() {
@@ -23,18 +26,10 @@ export default class Page {
       }
     });
 
-    const doubleSlider = new DoubleSlider(
-      {
-        min: 0,
-        max: 3000,
-        selected: {
-          from: 500,
-          to: 1500
-        }
-      });
+    const filterForm = new FilterForm(filters);
 
     this.components.sortableTable = sortableTable;
-    this.components.doubleSlider = doubleSlider;
+    this.components.filterForm = filterForm;
   }
 
   get template() {
@@ -43,36 +38,16 @@ export default class Page {
         <h2 class="page-title">Products</h2>
         <a href="/products/add" class="button-primary">Add products</a>
       </div>
-      <div class="content-box content-box_small">
-        <form class="form-inline">
-          <div class="form-group">
-            <label class="form-label">Sort by:</label>
-            <input type="text" data-element="filterName" class="form-control" placeholder="Product name">
-          </div>
-          <div class="form-group" data-element="doubleSlider">
-            <label class="form-label">Price:</label>
-            <!-- double slider component -->
-            </div>
-          <div class="form-group">
-            <label class="form-label">Status:</label>
-            <select class="form-control" data-elem="filterStatus">
-              <option value="" selected="">Any</option>
-              <option value="1">Active</option>
-              <option value="0">Not Active</option>
-            </select>
-          </div>
-        </form>
+      <div class="content-box content-box_small" data-element="filterForm">
+            <!--filter-form component-->
       </div>
       <div data-element="sortableTable">
-        <!-- sortable-table component -->
+            <!-- sortable-table component -->
       </div>
     </div>`;
   }
 
-  async updateTable(from, to) {
-    const encodedFrom = encodeURIComponent(from.toISOString());
-    const encodedTo = encodeURIComponent(to.toISOString());
-
+  async updateTable() {
     const PRODUCTS_URL = `${BACKEND_URL}/api/rest/products?_embed=subcategory.category`;
 
     const data = await fetchJson(PRODUCTS_URL);
@@ -119,9 +94,11 @@ export default class Page {
   }
 
   initEventListeners() {
+    document.addEventListener('datafilter', this.onDataFilter);
   }
 
   destroy() {
+    document.removeEventListener('datafilter', this.onDataFilter);
     this.components.forEach(component => {
       component.destroy();
     });
