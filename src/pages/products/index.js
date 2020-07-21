@@ -11,9 +11,11 @@ export default class Page {
   subElements = {};
   components = {};
 
-  onDataFilter = (event)=> {
-    console.log('changed');
-    console.log('here:' ,event.detail);
+  onDataFilter = (event) => {
+    const formData = event.detail;
+    const params = this.createQueryParams(formData);
+
+    this.updateTable(params)
   }
 
   async initComponents() {
@@ -47,9 +49,8 @@ export default class Page {
     </div>`;
   }
 
-  async updateTable() {
-    const PRODUCTS_URL = `${BACKEND_URL}/api/rest/products?_embed=subcategory.category`;
-
+  async updateTable(params ='') {
+    const PRODUCTS_URL = new URL(`${BACKEND_URL}api/rest/products?_embed=subcategory.category&${params}`);
     const data = await fetchJson(PRODUCTS_URL);
 
     //TODO: implement logic with add rows;
@@ -102,5 +103,17 @@ export default class Page {
     this.components.forEach(component => {
       component.destroy();
     });
+  }
+
+  createQueryParams(formData) {
+    const queryParams = new URLSearchParams('');
+
+    for (const param in formData) {
+
+      if (formData.hasOwnProperty(param)) {
+        queryParams.append('_' + param, formData[param]);
+      }
+    }
+    return queryParams;
   }
 }
