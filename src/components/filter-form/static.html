@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<body data-gr-c-s-loaded="true">
+<main class="main">
+  <div class="progress-bar">
+    <div class="progress-bar__line"></div>
+  </div>
+  <aside class="sidebar">
+    <h2 class="sidebar__title">
+      <a href="/">shop admin</a>
+    </h2>
+    <ul class="sidebar__nav">
+      <li>
+        <a href="/" data-page="dashboard">
+          <i class="icon-dashboard"></i><span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="/products" data-page="products">
+          <i class="icon-products"></i> <span>Products</span>
+        </a>
+      </li>
+      <li>
+        <a href="/categories" data-page="categories">
+          <i class="icon-categories"></i> <span>Categories</span>
+        </a>
+      </li>
+      <li>
+        <a href="/sales" data-page="sales">
+          <i class="icon-sales"></i> <span>Sales</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="sidebar__nav sidebar__nav_bottom">
+      <li>
+        <button type="button" class="sidebar__toggler">
+          <i class="icon-toggle-sidebar"></i> <span>Toggle sidebar</span>
+        </button>
+      </li>
+    </ul>
+  </aside>
+  <section class="content" id="content">
+    <div class="products">
+      <div class="content__top-panel">
+        <h2 class="page-title">Products</h2>
+        <a href="/products/add" class="button-primary">Add products</a>
+      </div>
+      <div class="content-box content-box_small" data-element="filterForm">
+        <!--filter-form component-->
+        <form class="form-inline form-filters">
+          <div class="form-group"><label class="form-label">Product name:</label>
+            <input type="text" data-form="filterName" class="form-control" placeholder="Enter a title..." data-filter="title">
+          </div>
+          <div class="form-group"><label class="form-label">Status:</label>
+            <select class="form-control" data-form="filterStatus" data-filter="status">
+              <option value="" selected="">Any</option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
