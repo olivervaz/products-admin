@@ -51,6 +51,7 @@ export default class Page {
 
   async updateTable(params ='') {
     const PRODUCTS_URL = new URL(`${BACKEND_URL}api/rest/products?_embed=subcategory.category&${params}`);
+    console.log(PRODUCTS_URL);
     const data = await fetchJson(PRODUCTS_URL);
 
     //TODO: implement logic with add rows;

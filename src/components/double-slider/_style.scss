@@ -49,6 +49,10 @@
     background: url("../components/double-slider/range-thumb-icon.svg") left center no-repeat;
     background-size: cover;
     cursor: grab;
+
+    /*hide inputs styles*/
+    border: none;
+    color: transparent;
   }
 
   &__thumb-left {
