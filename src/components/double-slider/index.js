@@ -94,6 +94,8 @@ export default class DoubleSlider {
     const boundaryRight = parseInt(thumbRight.style.right) || 0;
     const boundaryLeft = parseInt(thumbLeft.style.left) || 0;
 
+    this.calculatePrice();
+
     if (thumb.dataset.element === 'thumbLeft' && !this.isBoundary(newLeft, boundaryRight)) {
       from.innerHTML = this.formatValue(this.selected.from);
       progress.style.left = thumb.style.left = newLeft + '%';
@@ -102,7 +104,6 @@ export default class DoubleSlider {
       to.innerHTML = this.formatValue(this.selected.to);
       progress.style.right = thumb.style.right = newRight + '%';
     }
-    this.calculatePrice();
   }
 
   isBoundary(value, boundaryValue) {
@@ -114,8 +115,8 @@ export default class DoubleSlider {
     const { right } = this.subElements.thumbRight.style;
     const range = this.max - this.min;
 
-    this.selected.from = Math.round(range / 100 * (100 + parseFloat(left)));
-    this.selected.to = Math.round(range / 100 * (100 - parseFloat(right)) + this.min);
+    this.selected.from = Math.round(this.min + (range / 100 * parseFloat(left)));
+    this.selected.to = Math.round(this.max - (range / 100 * parseFloat(right)));
   }
 
   calculatePositionPercentage(clientX, direction){
