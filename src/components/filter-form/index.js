@@ -39,26 +39,30 @@ export default class FilterForm {
   renderInputs() {
     this.items.forEach(item => {
       const fieldSet = document.createElement('div');
-
-      //TODO: add logic with components
+      fieldSet.classList.add('form-group');
 
       if (!item.isComponent) {
-        fieldSet.classList.add('form-group');
         fieldSet.innerHTML = item.template;
-        fieldSet.firstElementChild.dataset.filter = item.id;
-
-        const label = document.createElement('label');
-        label.classList.add('form-label');
-        label.innerText = item.name + ':';
-        fieldSet.prepend(label);
-
-        this.element.append(fieldSet);
+      } else{
+        fieldSet.append(item.component.element);
       }
+
+      fieldSet.firstElementChild.dataset.filter = item.id;
+      const label = document.createElement('label');
+      label.classList.add('form-label');
+      label.innerText = item.name + ':';
+      fieldSet.prepend(label);
+
+      this.element.append(fieldSet);
     });
   }
 
+
+
   getFormsData() {
     const elements = this.element.querySelectorAll('[data-filter]');
+
+    /*for components set attributes(value, data-filter) in component`s configs*/
 
     return [...elements].reduce((accum, input) => {
       accum[input.dataset.filter] = input.value;

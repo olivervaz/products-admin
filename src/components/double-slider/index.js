@@ -26,8 +26,8 @@ export default class DoubleSlider {
       <span data-element="from">${this.formatValue(from)}</span>
       <div data-element="inner" class="range-slider__inner">
         <span data-element="progress" class="range-slider__progress"></span>
-        <span data-element="thumbLeft" class="range-slider__thumb-left"></span>
-        <span data-element="thumbRight" class="range-slider__thumb-right"></span>
+        <input data-element="thumbLeft" class="range-slider__thumb-left"></input>
+        <input data-element="thumbRight" class="range-slider__thumb-right"></input>
       </div>
       <span data-element="to">${this.formatValue(to)}</span>
     </div>`;
@@ -75,6 +75,12 @@ export default class DoubleSlider {
   }
 
   onMouseUp = (event) => {
+    const {thumbLeft, thumbRight} = this.subElements;
+
+    thumbLeft.setAttribute('value', this.selected.from);
+    thumbRight.setAttribute('value', this.selected.to);
+    this.dispatchEvent();
+
     document.removeEventListener('pointermove', this.onMouseMove);
     document.removeEventListener('pointerup', this.onMouseUp);
   }
@@ -95,7 +101,6 @@ export default class DoubleSlider {
     } else if (thumb.dataset.element === 'thumbRight' && !this.isBoundary(newRight, boundaryLeft)) {
       to.innerHTML = this.formatValue(this.selected.to);
       progress.style.right = thumb.style.right = newRight + '%';
-
     }
     this.calculatePrice();
   }
@@ -152,6 +157,13 @@ export default class DoubleSlider {
   remove() {
     this.element.remove();
   }
+
+  dispatchEvent(){
+    this.element.dispatchEvent(new Event('change',{
+      bubbles: true,
+    }))
+  }
+
 
   destroy() {
     const {thumbLeft, thumbRight} = this.subElements;
