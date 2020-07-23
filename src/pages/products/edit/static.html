@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body class="products-edit">
+<div class="content__top-panel">
+  <h1 class="page-title">
+    Products
+  </h1>
+  <button type="button" class="button-primary">Add product</button>
+</div>
+<div class="content-box">
+  <form class="form-grid">
+    <div class="form-group form-group__half_left">
+      <fieldset>
+        <label class="form-label">Product name</label>
+        <input type="text" class="form-control" placeholder="Product name">
+      </fieldset>
+    </div>
+    <div class="form-group form-group__wide">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" placeholder="The EOS 200D is a great choice for landscapes, portraits and travel and captures great quality photos and movies with a next-generation 24.2-megapixel image sensor."></textarea>
+    </div>
+    <div class="form-group form-group__wide">
+      <label class="form-label">Images</label>
+      <ul class="sortable-list">
+        <li class="sortable-list__item">
+            <span>
+              <img src="/assets/icons/icon-grab.svg" alt="grab">
+              <img class="sortable-table__cell-img" alt="Image" src="/assets/images/product-img.svg">
+              <span>image.png</span>
+            </span>
+          <span>
+              <img src="/assets/icons/icon-trash.svg" alt="delete">
+            </span>
+        </li>
+      </ul>
+      <button type="button" class="button-primary-outline">Upload</button>
+    </div>
+    <div class="form-group form-group__half_left">
+      <label class="form-label">Category</label>
+      <select class="form-control">
+        <option>Digital cameras</option>
+        <option>Digital cameras</option>
+        <option>Digital cameras</option>
+      </select>
+    </div>
+    <div class="form-group form-group__half_left form-group__two-col">
+      <fieldset>
+        <label class="form-label">Price ($)</label>
+        <input type="number" class="form-control" placeholder="1200">
+      </fieldset>
+      <fieldset>
+        <label class="form-label">Discount ($)</label>
+        <input type="number" class="form-control" placeholder="200">
+      </fieldset>
+    </div>
+    <div class="form-group form-group__part-half has-error">
+      <label class="form-label">Quantity</label>
+      <input type="number" class="form-control" placeholder="13">
+      <span class="form-error-text">Error message goes here</span>
+    </div>
+    <div class="form-group form-group__part-half">
+      <label class="form-label">Status</label>
+      <select class="form-control">
+        <option>Enabled</option>
+        <option>Disabled</option>
+      </select>
+    </div>
+    <div class="form-buttons">
+      <button type="submit" class="button-primary is-loading">Add product</button>
+      <button type="button" class="button-primary-outline">Add product</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
