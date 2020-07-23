@@ -7,4 +7,6 @@ router
   .addRoute(/^sales$/, 'sales')
   .addRoute(/^categories$/, 'categories')
   .addRoute(/^products$/, 'products')
+  .addRoute(/^products\/add$/, 'products/edit')
+  .addRoute(/^products\/([\w()-]+)$/, 'products/edit')
   .listen();
