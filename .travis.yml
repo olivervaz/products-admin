@@ -15,10 +15,11 @@ deploy:
     on:
       branch: master
 
-#  - provider: heroku
-#    skip_cleanup: true
-#    api_key: $ACCESS-HEROKU_KEY
-#    app: products-admin-app
-#    local_dir: build
-#    on:
-#      branch: master
+  - provider: heroku
+    skip_cleanup: true
+    api_key:
+      secure: $ACCESS-HEROKU_KEY
+    app: products-admin-app
+    local_dir: build
+    on:
+      branch: master
