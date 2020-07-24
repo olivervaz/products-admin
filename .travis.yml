@@ -11,12 +11,14 @@ deploy:
     bucket: product-admin-production
     region: eu-central-1
     acl: public_read
+    local_dir: build
     on:
       branch: master
 
-  - provider: heroku
-    skip_cleanup: true
-    api_key: $ACCESS-HEROKU_KEY
-    app: products-admin-app
-    on:
-      branch: master
+#  - provider: heroku
+#    skip_cleanup: true
+#    api_key: $ACCESS-HEROKU_KEY
+#    app: products-admin-app
+#    local_dir: build
+#    on:
+#      branch: master
