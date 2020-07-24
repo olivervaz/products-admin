@@ -18,7 +18,7 @@ deploy:
   - provider: heroku
     skip_cleanup: true
     api_key:
-      secure: $ACCESS-HEROKU_KEY
+      secure: $ACCESS_HEROKU_KEY
     app: products-admin-app
     local_dir: build
     on:
