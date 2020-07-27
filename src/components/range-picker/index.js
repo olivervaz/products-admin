@@ -1,13 +1,12 @@
 export default class RangePicker {
   element;
   subElements = {};
-  // TODO: rename "selectingFrom"
   selectingFrom = true;
   selected = {
     from: new Date(),
     to: new Date()
   };
-  dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit'};
 
   static daysInMonth(month, year) {
     return new Date(year, month + 1, 0).getDate();
@@ -36,8 +35,8 @@ export default class RangePicker {
 
   get inputTemplate() {
     return `
-      <span data-elem="from">${this.selected.from.toLocaleDateString('ru-RU', this.dateOptions)}</span> -
-      <span data-elem="to">${this.selected.to.toLocaleDateString('ru-RU', this.dateOptions)}</span>
+      <span data-elem="from">${this.selected.from.toLocaleDateString('en-EN', this.dateOptions)}</span> -
+      <span data-elem="to">${this.selected.to.toLocaleDateString('en-EN', this.dateOptions)}</span>
     `;
   }
 
@@ -53,8 +52,8 @@ export default class RangePicker {
           <div class="rangepicker__selector-control rangepicker__selector-control-right"></div>
           <div class="rangepicker__calendar">
             <div class="rangepicker__month-indicator">
-              <time datetime="${dateFrom.toLocaleString('ru', { month: 'long' })}">
-                 ${dateFrom.toLocaleString('ru', { month: 'long' })}
+              <time datetime="${dateFrom.toLocaleString('en-EN', { month: 'long' })}">
+                 ${dateFrom.toLocaleString('en-EN', { month: 'long' })}
               </time>
             </div>
             ${this.weekDaysTemplate}
@@ -62,8 +61,8 @@ export default class RangePicker {
           </div>
           <div class="rangepicker__calendar">
            <div class="rangepicker__month-indicator">
-              <time datetime="${dateTo.toLocaleString('ru', { month: 'long' })}">
-                 ${dateTo.toLocaleString('ru', { month: 'long' })}
+              <time datetime="${dateTo.toLocaleString('en-EN', { month: 'long' })}">
+                 ${dateTo.toLocaleString('en-EN', { month: 'long' })}
               </time>
             </div>
             ${this.weekDaysTemplate}
@@ -97,8 +96,9 @@ export default class RangePicker {
   getDateTemplate(day, month, year) {
     const date = new Date(year, month, day);
     return `
-     <button type="button" class="rangepicker__cell" data-value="${date}">${day}</button>
-    `;
+     <button type="button"
+             class="rangepicker__cell"
+             data-value="${date}">${day}</button>`;
   }
 
   render() {
@@ -204,7 +204,6 @@ export default class RangePicker {
     const cells = this.element.querySelectorAll('.rangepicker__cell');
     this.clearDatesHighlighting(cells);
     this.addDatesHighlighting(cells);
-
   }
 
   addDatesHighlighting(cells) {
@@ -214,12 +213,12 @@ export default class RangePicker {
     cells.forEach(item => {
       const itemDate = new Date(item.dataset.value);
 
-      if (itemDate > fromDate && toDate && itemDate < toDate) {
-        item.classList.add('rangepicker__selected-between');
-      } else if (fromDate && itemDate.toISOString() === fromDate.toISOString()) {
+      if (fromDate && itemDate.toDateString()=== fromDate.toDateString()) {
         item.classList.add('rangepicker__selected-from');
-      } else if (toDate && itemDate.toISOString() === toDate.toISOString()) {
+      } else if (toDate && itemDate.toDateString() === toDate.toDateString()) {
         item.classList.add('rangepicker__selected-to');
+      } else if (itemDate > fromDate && toDate && itemDate < toDate) {
+        item.classList.add('rangepicker__selected-between');
       }
     });
   }
