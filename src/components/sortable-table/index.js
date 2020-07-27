@@ -133,6 +133,11 @@ export default class SortableTable {
     return `/${obj.id}/`;
   }
 
+  async updateRows(params = new URLSearchParams()){
+    const data = await this.loadData(this.sorted.id,this.sorted.order, params);
+    this.renderRows(data);
+  }
+
   get tableEmptyPlaceholder() {
     return `
             <div data-elem="emptyPlaceholder" class="sortable-table__empty-placeholder">
@@ -170,16 +175,16 @@ export default class SortableTable {
     this.initEventListeners();
   }
 
-  initEventListeners() {
-    this.subElements.header.addEventListener('pointerdown', this.onSortClick);
-    window.addEventListener('scroll', this.onScroll);
-  }
-
-  async loadData(id, order) {
+  async loadData(id, order, params = new URLSearchParams()) {
     this.url.searchParams.set('_sort', id);
     this.url.searchParams.set('_order', order);
     this.url.searchParams.set('_start', this.fromSize);
     this.url.searchParams.set('_end', this.toSize);
+
+    [...params.entries()].forEach(pair => {
+      this.url.searchParams.set(pair[0], pair[1]);
+    })
+
     return await fetchJson(this.url);
   }
 
@@ -225,6 +230,11 @@ export default class SortableTable {
 
       return accum;
     }, {});
+  }
+
+  initEventListeners() {
+    this.subElements.header.addEventListener('pointerdown', this.onSortClick);
+    window.addEventListener('scroll', this.onScroll);
   }
 
   remove() {

@@ -20,7 +20,7 @@ export default class Page {
     const encodedTo = encodeURIComponent(to.toISOString());
 
     const sortableTable = new SortableTable(header, {
-      url: `api/rest/orders?createdAt_gte=${encodedFrom}&createdAt_lte=${encodedTo}`,
+      url: `api/rest/orders`,
       isSortLocally: false,
       sorted: {
         id: 'createdAt',
@@ -50,13 +50,12 @@ export default class Page {
   async updateTable(from, to) {
     const encodedFrom = encodeURIComponent(from.toISOString());
     const encodedTo = encodeURIComponent(to.toISOString());
+    const params = new URLSearchParams();
 
-    const BESTSELLERS_URL = `${BACKEND_URL}api/rest/orders?createdAt_gte=${encodedFrom}&createdAt_lte=${encodedTo}`;
+    params.append('createdAt_gte', encodedFrom);
+    params.append('createdAt_lte', encodedTo)
 
-    const data = await fetchJson(BESTSELLERS_URL);
-
-    //TODO: implement logig with add rows;
-    this.components.sortableTable.addRows(data);
+    this.components.sortableTable.updateRows(params);
   }
 
   async render() {
