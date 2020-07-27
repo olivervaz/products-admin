@@ -1,4 +1,4 @@
-import DoubleSlider from '../../components/double-slider';
+import DoubleSlider from '../../../components/double-slider';
 
 const filters = [
   {

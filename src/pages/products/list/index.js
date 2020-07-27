@@ -1,8 +1,8 @@
-import SortableTable from '../../components/sortable-table';
-import FilterForm from '../../components/filter-form';
+import SortableTable from '../../../components/sortable-table';
+import FilterForm from '../../../components/filter-form';
 import header from './productsTableHeadersConfig';
 import filters from './filterFormConfig';
-import fetchJson from '../../utils/fetch-json';
+import fetchJson from '../../../utils/fetch-json';
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -13,9 +13,10 @@ export default class Page {
 
   onDataFilter = (event) => {
     const formData = event.detail;
-    const params = this.createQueryParams(formData);
+    console.log(formData);
 
-    this.updateTable(params)
+    const params = this.createQueryParams(formData);
+    this.updateTable(params);
   }
 
   async initComponents() {
@@ -49,13 +50,8 @@ export default class Page {
     </div>`;
   }
 
-  async updateTable(params ='') {
-    const PRODUCTS_URL = new URL(`${BACKEND_URL}api/rest/products?_embed=subcategory.category&${params}`);
-    console.log(PRODUCTS_URL);
-    const data = await fetchJson(PRODUCTS_URL);
-
-    //TODO: implement logic with add rows;
-    this.components.sortableTable.addRows(data);
+  updateTable(params = new URLSearchParams()) {
+    this.components.sortableTable.updateRows(params);
   }
 
   async render() {
@@ -112,7 +108,12 @@ export default class Page {
     for (const param in formData) {
 
       if (formData.hasOwnProperty(param)) {
-        queryParams.append('_' + param, formData[param]);
+
+        if (formData[param]){
+          /*if param is not empty and not undefined*/
+          queryParams.append(param, formData[param]);
+        }
+
       }
     }
     return queryParams;
