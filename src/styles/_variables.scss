@@ -15,11 +15,12 @@ $colors-aside: (
   "red": #f7685b
 );
 
-$color-primary: #109cf1;
-$color-secondary: #334d6e; /*dark-blue*/
+$color-primary: #7BD389;
+$color-secondary: #607466;
+$color-accent: #AEDCC0;
 
-$color-bg-secondary: #f5f6f8;
 $color-bg-primary: #ffffff;
+$color-bg-secondary: #f5f6f8;
 
 $color-text-primary: map_get($grayscale,"grey");
 $color-text-secondary: map_get($grayscale,"white");
