@@ -1,5 +1,5 @@
-import SortableTable from '../../components/sortable-table';
 import FilterForm from '../../components/filter-form';
+import ProductsTable from '../../components/products-table';
 import header from './productsTableHeadersConfig';
 import filters from './filterFormConfig';
 import fetchJson from '../../utils/fetch-json';
@@ -19,7 +19,7 @@ export default class Page {
   }
 
   async initComponents() {
-    const sortableTable = new SortableTable(header, {
+    const sortableTable = new ProductsTable(header, {
       url: `/api/rest/products?_embed=subcategory.category`,
       isSortLocally: false,
       sorted: {
