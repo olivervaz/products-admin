@@ -1,8 +1,7 @@
-import SortableTable from '../../../components/sortable-table';
+import ProductsTable from '../../../components/products-table';
 import FilterForm from '../../../components/filter-form';
 import header from './productsTableHeadersConfig';
 import filters from './filterFormConfig';
-import fetchJson from '../../../utils/fetch-json';
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -13,14 +12,13 @@ export default class Page {
 
   onDataFilter = (event) => {
     const formData = event.detail;
-    console.log(formData);
-
     const params = this.createQueryParams(formData);
-    this.updateTable(params);
+
+    this.updateTable(params)
   }
 
   async initComponents() {
-    const sortableTable = new SortableTable(header, {
+    const sortableTable = new ProductsTable(header, {
       url: `/api/rest/products?_embed=subcategory.category`,
       isSortLocally: false,
       sorted: {

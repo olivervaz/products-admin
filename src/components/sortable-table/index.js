@@ -98,15 +98,11 @@ export default class SortableTable {
   }
 
   getTableBodyRows(data) {
-    return data.map(item => `
-      <div class="sortable-table__row">
-        ${this.getTableBodyRow(item, data)}
-      </div>`
-    ).join('');
+    return data.map(item => this.formatRow(item.id, this.getTableBodyRow(item))).join('');
   }
 
   getTableBodyRow(item) {
-    const cells = this.headersConfig.map(({ id, template }) => {
+    const cells = this.headersConfig.map(({id, template }) => {
       return {
         id,
         template
@@ -248,5 +244,9 @@ export default class SortableTable {
   destroy() {
     this.remove();
     this.subElements = {};
+  }
+
+  formatRow(id, row) {
+    return `<div class="sortable-table__row">${row}</div>`
   }
 }
