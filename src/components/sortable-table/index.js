@@ -186,7 +186,7 @@ export default class SortableTable {
     this.url.searchParams.set('_end', this.toSize);
 
     [...params.entries()].forEach(pair => {
-      this.url.searchParams.set(`_${pair[0]}`, pair[1]);
+      this.url.searchParams.set(pair[0], pair[1]);
     })
 
     return await fetchJson(this.url);
