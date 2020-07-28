@@ -109,7 +109,7 @@ export default class Page {
 
         if (formData[param]){
           /*if param is not empty and not undefined*/
-          queryParams.append('_' + param, formData[param]);
+          queryParams.append(param, formData[param]);
         }
 
       }
