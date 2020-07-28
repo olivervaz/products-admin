@@ -96,15 +96,15 @@ export default class Page {
     this.components.customersChart.update(customersData);
   }
 
-  async updateTable(from, to) {
+  updateTable(from, to) {
     const encodedFrom = encodeURIComponent(from.toISOString());
     const encodedTo = encodeURIComponent(to.toISOString());
 
-    const BESTSELLERS_URL = `${BACKEND_URL}api/dashboard/bestsellers?_start=1&_end=20&from=${encodedFrom}&to=${encodedTo}`;
+    const params = new URLSearchParams();
+    params.append('from', encodedFrom);
+    params.append('to', encodedTo);
 
-    const data = await fetchJson(BESTSELLERS_URL);
-    //TODO: implement logic with add rows;
-    this.components.sortableTable.addRows(data);
+    this.components.sortableTable.updateRows(params);
   }
 
   async render() {
