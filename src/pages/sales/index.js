@@ -1,4 +1,4 @@
-import SortableTable from '../../components/sortable-table';
+import InfinityTable from '../../components/infinity-table';
 import RangePicker from '../../components/range-picker';
 import header from './salesTableHeadersConfig';
 import fetchJson from '../../utils/fetch-json';
@@ -19,7 +19,7 @@ export default class Page {
     const encodedFrom = encodeURIComponent(from.toISOString());
     const encodedTo = encodeURIComponent(to.toISOString());
 
-    const sortableTable = new SortableTable(header, {
+    const infinityTable = new InfinityTable(header, {
       url: `api/rest/orders`,
       isSortLocally: false,
       sorted: {
@@ -30,7 +30,7 @@ export default class Page {
 
     const rangePicker = new RangePicker({ from, to });
 
-    this.components.sortableTable = sortableTable;
+    this.components.infinityTable = infinityTable;
     this.components.rangePicker = rangePicker;
   }
 
@@ -41,7 +41,7 @@ export default class Page {
         <!-- range-picker component -->
         <div data-element="rangePicker"></div>
       </div>
-      <div data-element="sortableTable">
+      <div data-element="infinityTable">
         <!-- sortable-table component -->
       </div>
     </div>`;
@@ -55,7 +55,7 @@ export default class Page {
     params.append('createdAt_gte', encodedFrom);
     params.append('createdAt_lte', encodedTo)
 
-    this.components.sortableTable.updateRows(params);
+    this.components.infinityTable.updateRows(params);
   }
 
   async render() {

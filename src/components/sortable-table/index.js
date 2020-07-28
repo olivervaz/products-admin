@@ -26,7 +26,6 @@ export default class SortableTable {
     this.render();
   }
 
-
   onSortClick = event => {
     const column = event.target.closest('[data-sortable="true"]');
     if (column) {
@@ -45,26 +44,6 @@ export default class SortableTable {
         this.sortOnServer(id, order);
       }
     }
-  };
-
-  onScroll = async (event) => {
-    const { id, order } = this.sorted;
-    const windowBottom = document.documentElement.getBoundingClientRect().bottom;
-
-    if (!this.isLoading && windowBottom < document.documentElement.clientHeight + 100) {
-      this.isLoading = true;
-      this.fromSize = this.toSize;
-      this.toSize = this.toSize + 20;
-      const data = this.data = await this.loadData(id, order);
-
-      if (data.length > 0) {
-        const rows = this.getTableBodyRows(data);
-        this.subElements.body.insertAdjacentHTML('beforeend', rows);
-      } else {
-        window.removeEventListener('scroll', this.onScroll);
-      }
-    }
-    this.isLoading = false;
   };
 
   getTable() {
@@ -234,7 +213,6 @@ export default class SortableTable {
 
   initEventListeners() {
     this.subElements.header.addEventListener('pointerdown', this.onSortClick);
-    window.addEventListener('scroll', this.onScroll);
   }
 
   remove() {
@@ -243,7 +221,6 @@ export default class SortableTable {
 
   destroy() {
     this.subElements.header.removeEventListener('pointerdown', this.onSortClick);
-    window.removeEventListener('scroll', this.onScroll);
     this.remove();
     this.subElements = {};
   }
