@@ -3,6 +3,22 @@ class Tooltip {
 
   element;
 
+  onPointerOut = (event) => {
+    this.remove();
+  }
+
+  onPointerOver = (event) => {
+    const target = event.target.closest('[data-tooltip]');
+    if(target) {
+      this.render(target.dataset.tooltip);
+      this.defineTooltipPosition(event);
+    }
+  }
+
+  onPointerMove = (event) => {
+    this.defineTooltipPosition(event)
+  }
+
   constructor() {
     if (Tooltip.instance) {
       return Tooltip.instance;
@@ -23,22 +39,6 @@ class Tooltip {
 
   initialize() {
     this.initEventListeners();
-  }
-
-  onPointerOut = (event) => {
-    this.remove();
-  }
-
-  onPointerOver = (event) => {
-    const target = event.target.closest('[data-tooltip]');
-    if(target) {
-      this.render(target.dataset.tooltip);
-      this.defineTooltipPosition(event);
-    }
-  }
-
-  onPointerMove = (event) => {
-    this.defineTooltipPosition(event)
   }
 
   defineTooltipPosition(event){

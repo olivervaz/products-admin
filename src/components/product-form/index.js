@@ -15,6 +15,12 @@ export default class ProductFormComponent {
     categories: []
   };
 
+  onDeleteClick = event => {
+      if ('deleteHandle' in event.target.dataset) {
+        event.target.closest('li').remove();
+    }
+  }
+
   onSubmit =  event => {
     event.preventDefault();
     this.save();
@@ -275,11 +281,7 @@ export default class ProductFormComponent {
 
     imageUploadBtn.addEventListener('click', this.uploadImage);
     productFormSaveBtn.addEventListener('click', this.onSubmit);
-    imageListContainer.addEventListener('click', (event) => {
-      if ('deleteHandle' in event.target.dataset) {
-        event.target.closest('li').remove();
-      }
-    })
+    imageListContainer.addEventListener('click', this.onDeleteClick);
   }
 
   async save(){
@@ -303,9 +305,14 @@ export default class ProductFormComponent {
   }
 
   destroy() {
+    const {imageListContainer, imageUploadBtn, productFormSaveBtn} = this.subElements;
+
     this.remove();
     this.element = null;
     this.subElements = null;
+    imageUploadBtn.removeEventListener('click', this.uploadImage);
+    productFormSaveBtn.removeEventListener('click', this.onSubmit);
+    imageListContainer.removeEventListener('click', this.onDeleteClick);
   }
 
   remove() {
