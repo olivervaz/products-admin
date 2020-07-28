@@ -17,8 +17,8 @@ export default class Page {
   async initComponents() {
     const to = new Date();
     const from = new Date(to.getTime() - (30 * 24 * 60 * 60 * 1000));
-    const encodedFrom = encodeURIComponent(from.toISOString());
-    const encodedTo = encodeURIComponent(to.toISOString());
+    const encodedFrom = from.toISOString();
+    const encodedTo = to.toISOString();
     const [ordersData, salesData, customersData] = await this.getDataForColumnCharts(from, to);
 
     const sortableTable = new SortableTable(header, {
@@ -74,8 +74,8 @@ export default class Page {
   }
 
   async getDataForColumnCharts(from, to) {
-    const encodedFrom = encodeURIComponent(from.toISOString());
-    const encodedTo = encodeURIComponent(to.toISOString());
+    const encodedFrom = from.toISOString();
+    const encodedTo = to.toISOString();
 
     const ORDERS_URL = `${BACKEND_URL}api/dashboard/orders?from=${encodedFrom}&to=${encodedTo}`;
     const SALES_URL = `${BACKEND_URL}api/dashboard/sales?from=${encodedFrom}&to=${encodedTo}`;
@@ -97,8 +97,8 @@ export default class Page {
   }
 
   updateTable(from, to) {
-    const encodedFrom = encodeURIComponent(from.toISOString());
-    const encodedTo = encodeURIComponent(to.toISOString());
+    const encodedFrom = from.toISOString();
+    const encodedTo = to.toISOString();
 
     const params = new URLSearchParams();
     params.append('from', encodedFrom);
@@ -147,6 +147,7 @@ export default class Page {
   initEventListeners() {
     this.components.rangePicker.element.addEventListener('date-select', event => {
       const { from, to } = event.detail;
+      console.log(event.detail);
       this.updateColumnsCharts(from, to);
       this.updateTable(from, to);
     });
