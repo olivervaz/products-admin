@@ -95,9 +95,9 @@ export default class Page {
 
   destroy() {
     document.removeEventListener('datafilter', this.onDataFilter);
-    this.components.forEach(component => {
-      component.destroy();
-    });
+    for(const component in this.components){
+      this.components[component].destroy();
+    }
   }
 
   createQueryParams(formData) {

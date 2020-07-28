@@ -103,8 +103,8 @@ export default class Page {
   }
 
   destroy() {
-    this.components.forEach(component => {
-      component.destroy();
-    });
+    for(const component in this.components){
+      this.components[component].destroy();
+    }
   }
 }
