@@ -47,7 +47,7 @@ export default class ProductFormComponent {
         const result = await fetchJson('https://api.imgur.com/3/image', {
           method:  'POST',
           headers: {
-            Authorization: `Client-ID ${IMGUR_CLIENT_ID}`
+            Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`
           },
           body: formData,
         });
@@ -79,42 +79,42 @@ export default class ProductFormComponent {
       <form name = "productForm" data-element="productForm" class="form-grid">
         <div class="form-group form-group__half_left">
           <fieldset>
-            <label class="form-label">Название товара</label>
+            <label class="form-label">Product name: </label>
             <input required=""
                    type="text"
                    name="title"
-                   value="${this.formData.title}"
+                   value='${this.formData.title}'
                    class="form-control"
-                   placeholder="Название товара">
+                   placeholder="Title...">
           </fieldset>
         </div>
 
         <div class="form-group form-group__wide">
-          <label class="form-label">Описание</label>
+          <label class="form-label">Description: </label>
           <textarea required=""
                     class="form-control"
                     name="description"
                     data-element="productDescription"
-                    placeholder="Описание товара">${this.formData.description}</textarea>
+                    placeholder="Description...">${this.formData.description}</textarea>
         </div>
 
         <div class="form-group form-group__half_left">
-          <label class="form-label">Категория</label>
+          <label class="form-label">Category: </label>
           ${this.categoriesTemplate}
         </div>
 
         <div class="form-group form-group__wide" data-element="sortable-list-container">
-          <label class="form-label">Фото</label>
+          <label class="form-label">Image: </label>
            ${this.imageList}
           <div data-element="fileInputList"></div>
           <button type="button" name="uploadImage" class="button-primary-outline" data-element="imageUploadBtn">
-            <span>Загрузить</span>
+            <span>Upload</span>
           </button>
         </div>
 
         <div class="form-group form-group__half_left form-group__two-col">
           <fieldset>
-            <label class="form-label">Цена ($)</label>
+            <label class="form-label">Price ($): </label>
             <input required=""
                    type="number"
                    name="price"
@@ -124,7 +124,7 @@ export default class ProductFormComponent {
           </fieldset>
 
           <fieldset>
-            <label class="form-label">Скидка ($)</label>
+            <label class="form-label">Discount ($): </label>
             <input required=""
                    type="number"
                    name="discount"
@@ -135,7 +135,7 @@ export default class ProductFormComponent {
         </div>
 
         <div class="form-group form-group__part-half">
-          <label class="form-label">Количество</label>
+          <label class="form-label">Amount</label>
           <input required=""
                  type="number"
                  class="form-control"
@@ -145,10 +145,10 @@ export default class ProductFormComponent {
         </div>
 
         <div class="form-group form-group__part-half">
-           <label class="form-label">Статус</label>
+           <label class="form-label">Status</label>
            <select class="form-control" name="status">
-           <option value="1">Активен</option>
-           <option value="0">Неактивен</option>
+           <option value="1">Active</option>
+           <option value="0">Not active</option>
            </select>
         </div>
 
@@ -156,7 +156,7 @@ export default class ProductFormComponent {
           <button type="submit"
                   name="save"
                   class="button-primary-outline"
-                  data-element ="productFormSaveBtn">Сохранить товар</button>
+                  data-element ="productFormSaveBtn">Save product</button>
         </div>
       </form>
     </div>`
@@ -183,12 +183,12 @@ export default class ProductFormComponent {
         <input type="hidden" name="url" value="${imageObj.url}">
           <input type="hidden" name="source" value="${imageObj.source}">
                   <span>
-                     <img src="./icon-grab.svg" data-grab-handle="" alt="grab">
+                     <img src="./components/sortable-list/icon-grab.svg" data-grab-handle="" alt="grab">
                      <img class="sortable-table__cell-img" alt="${imageObj.source}" src="${imageObj.url}">
                      <span>${imageObj.source}</span>
                   </span>
             <button type="button">
-                <img src="./icon-trash.svg" data-delete-handle="" alt="delete">
+                <img src="./components/sortable-list/icon-trash.svg" data-delete-handle="" alt="delete">
             </button>
       </li>`;
 
@@ -206,7 +206,6 @@ export default class ProductFormComponent {
 
     this.formData = productData;
     this.categories = categoriesData;
-
 
     const element = document.createElement('div');
     element.innerHTML = this.template;
@@ -287,7 +286,7 @@ export default class ProductFormComponent {
   async save(){
     const product = this.getInputsData();
 
-    const result = fetchJson(BACKEND_URL + '/api/rest/products',{
+    const result = fetchJson(process.env.BACKEND_URL + '/api/rest/products',{
       method:  'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -297,11 +296,11 @@ export default class ProductFormComponent {
   }
 
   async loadCategoriesList () {
-    return await fetchJson(`${BACKEND_URL}/api/rest/categories?_sort=weight&_refs=subcategory`);
+    return await fetchJson(`${process.env.BACKEND_URL}api/rest/categories?_sort=weight&_refs=subcategory`);
   }
 
   async loadProductData (productId) {
-    return await fetchJson(`${BACKEND_URL}/api/rest/products?id=${productId}`);
+    return await fetchJson(`${process.env.BACKEND_URL}api/rest/products?id=${productId}`);
   }
 
   destroy() {
