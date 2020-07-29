@@ -1,3 +1,4 @@
+import Page from '../base';
 import SortableTable from '../../components/sortable-table';
 import RangePicker from '../../components/range-picker';
 import ColumnChart from '../../components/column-chart';
@@ -6,12 +7,12 @@ import fetchJson from '../../utils/fetch-json';
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
-export default class Page {
-  element;
-  subElements = {};
-  components = {};
+export default class DashboardPage extends Page{
 
-  constructor() {
+  onDateSelect = (event)=> {
+    const { from, to } = event.detail;
+    this.updateColumnsCharts(from, to);
+    this.updateTable(from, to);
   }
 
   async initComponents() {
@@ -107,55 +108,12 @@ export default class Page {
     this.components.sortableTable.updateRows(params);
   }
 
-  async render() {
-    const element = document.createElement('div');
-
-    element.innerHTML = this.template;
-
-    this.element = element.firstElementChild;
-
-    await this.initComponents();
-
-    this.subElements = this.getSubElements(this.element);
-
-    this.renderComponents();
-
-    this.initEventListeners();
-
-    return this.element;
-  }
-
-  renderComponents() {
-    Object.keys(this.components).forEach(component => {
-      const root = this.subElements[component];
-      const { element } = this.components[component];
-
-      root.append(element);
-    });
-  }
-
-  getSubElements(element) {
-    const elements = element.querySelectorAll('[data-element]');
-
-    return [...elements].reduce((accum, subElement) => {
-      accum[subElement.dataset.element] = subElement;
-
-      return accum;
-    }, {});
-  }
-
   initEventListeners() {
-    this.components.rangePicker.element.addEventListener('date-select', event => {
-      const { from, to } = event.detail;
-      console.log(event.detail);
-      this.updateColumnsCharts(from, to);
-      this.updateTable(from, to);
-    });
+    this.components.rangePicker.element.addEventListener('date-select',this.onDateSelect);
   }
 
   destroy() {
-    for(const component in this.components){
-      this.components[component].destroy();
-    }
+    this.components.rangePicker.element.removeEventListener('date-select',this.onDateSelect);
+    super.destroy()
   }
 }

@@ -1,12 +1,10 @@
+import Page from '../base';
 import SortableList from '../../components/sortable-list';
 import fetchJson from '../../utils/fetch-json';
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
-export default class Page {
-  element;
-  subElements = {};
-  components = {};
+export default class CategoriesPage extends Page{
 
   onPageClick = event => {
     const target = event.target.closest('.category__header');
@@ -15,9 +13,6 @@ export default class Page {
       const category = event.target.closest('.category');
       category.classList.toggle('category_open');
     }
-  }
-
-  constructor(){
   }
 
   get template() {
@@ -93,30 +88,4 @@ export default class Page {
 
     return this.element;
   }
-
-  renderComponents() {
-    Object.keys(this.components).forEach(component => {
-      const root = this.subElements[component];
-      const { element } = this.components[component];
-
-      root.append(element);
-    });
-  }
-
-  getSubElements(element) {
-    const elements = element.querySelectorAll('[data-element]');
-
-    return [...elements].reduce((accum, subElement) => {
-      accum[subElement.dataset.element] = subElement;
-
-      return accum;
-    }, {});
-  }
-
-  destroy() {
-    for(const component in this.components){
-      this.components[component].destroy();
-    }
-  }
-
 }

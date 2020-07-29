@@ -1,14 +1,10 @@
+import Page from '../../base';
 import ProductsTable from '../../../components/products-table';
 import FilterForm from '../../../components/filter-form';
 import header from './productsTableHeadersConfig';
 import filters from './filterFormConfig';
 
-const BACKEND_URL = process.env.BACKEND_URL;
-
-export default class Page {
-  element;
-  subElements = {};
-  components = {};
+export default class ProductsListPage extends Page{
 
   onDataFilter = (event) => {
     const formData = event.detail;
@@ -52,52 +48,13 @@ export default class Page {
     this.components.sortableTable.updateRows(params);
   }
 
-  async render() {
-    const element = document.createElement('div');
-
-    element.innerHTML = this.template;
-
-    this.element = element.firstElementChild;
-
-    await this.initComponents();
-
-    this.subElements = this.getSubElements(this.element);
-
-    this.renderComponents();
-
-    this.initEventListeners();
-
-    return this.element;
-  }
-
-  renderComponents() {
-    Object.keys(this.components).forEach(component => {
-      const root = this.subElements[component];
-      const { element } = this.components[component];
-
-      root.append(element);
-    });
-  }
-
-  getSubElements(element) {
-    const elements = element.querySelectorAll('[data-element]');
-
-    return [...elements].reduce((accum, subElement) => {
-      accum[subElement.dataset.element] = subElement;
-
-      return accum;
-    }, {});
-  }
-
   initEventListeners() {
     document.addEventListener('datafilter', this.onDataFilter);
   }
 
   destroy() {
     document.removeEventListener('datafilter', this.onDataFilter);
-    for(const component in this.components){
-      this.components[component].destroy();
-    }
+    super.destroy();
   }
 
   createQueryParams(formData) {
