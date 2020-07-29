@@ -4,7 +4,7 @@ export default async function(path, match) {
   /*todo implement loading logic*/
 
   const { default: Page } = await import(`../pages/${path}/index.js`);
-  const page = new Page();
+  const page = new Page(match);
   const element = await page.render();
 
   const contentNode = document.querySelector('#content');
